@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,17 +45,23 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPass.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                }else{
-                                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                if(etEmail.getText().toString().equals(null) || etEmail.getText().toString().equals("")
+                        || etPass.getText().toString().equals(null) || etPass.getText().toString().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Email and/or password field is empty.", Toast.LENGTH_LONG).show();
+                }else{
+                    firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPass.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                    }else{
+                                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
+
             }
         });
     }
