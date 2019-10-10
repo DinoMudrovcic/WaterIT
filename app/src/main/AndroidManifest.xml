@@ -32,17 +32,6 @@
         <activity
             android:name=".activities.LocationActivity"
             android:parentActivityName=".activities.HomeActivity" />
-        <activity
-            android:name=".activities.SensorActivity"
-            android:parentActivityName=".activities.LocationActivity" />
-        <activity
-            android:name=".activities.WeatherActivity"
-            android:parentActivityName=".activities.LocationActivity" />
-        <activity
-            android:name=".activities.ActionActivity"
-            android:parentActivityName=".activities.LocationActivity" />
-        <activity android:name=".activities.THSensorsActivity"
-            android:parentActivityName=".activities.SensorActivity"></activity>
     </application>
 
 </manifest>
