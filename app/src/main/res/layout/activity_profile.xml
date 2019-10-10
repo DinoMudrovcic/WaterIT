@@ -4,33 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dinomudrovcic.waterit.ProfileActivity"
-    android:layout_margin="10dp"
+    tools:context="com.dinomudrovcic.waterit.activities.ProfileActivity"
+    android:padding="10dp"
+    android:background="@color/backgroundFragment"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/tvUsername"
-        android:textSize="30dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginBottom="10dp"
-        />
+        >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/tvEmail"
-        android:textSize="30dp"
-        android:layout_marginBottom="10dp"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:text="User:"
+            android:textColor="#fff"
+            />
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/tvUsername"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/tvFullname"
-        android:textSize="30dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginBottom="10dp"
-        />
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:text="Email:"
+            android:textColor="#fff"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/tvEmail"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:text="Full name or company name:"
+            android:textColor="#fff"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/tvFullname"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            />
+
+    </LinearLayout>
+
+
+
+
 
 
 </LinearLayout>

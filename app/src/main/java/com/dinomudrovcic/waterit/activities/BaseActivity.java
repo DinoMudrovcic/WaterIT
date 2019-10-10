@@ -1,23 +1,32 @@
-package com.dinomudrovcic.waterit;
+package com.dinomudrovcic.waterit.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
+import com.dinomudrovcic.waterit.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
+    String path = "";
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutResourceId());
+
+
+
+    }
+
+    protected abstract int getLayoutResourceId();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,12 +40,12 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.action_profile_information:
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.add(R.id.ProfileFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent profileIntent = new Intent(BaseActivity.this, ProfileActivity.class);
+                startActivity(profileIntent);
                 return true;
             case R.id.action_sign_out:
                 FirebaseAuth.getInstance().signOut();
@@ -48,6 +57,16 @@ public class BaseActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void setTitleBar(String title, boolean backEnabled) {
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setTitle(title);
+
+        actionBar.setDisplayHomeAsUpEnabled(backEnabled);
+
+        actionBar.setElevation(0);
     }
 
 }

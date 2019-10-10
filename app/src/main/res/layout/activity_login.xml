@@ -5,28 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dinomudrovcic.waterit.LoginActivity">
+    android:padding="5dp"
+    android:background="@color/backgroundFragment"
+    tools:context="com.dinomudrovcic.waterit.activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:textColor="#fff"
+            android:text="LOGIN"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/etEmail"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite email..."
-        android:inputType="textEmailAddress" />
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite email..."
+            android:inputType="textEmailAddress"
+            android:textSize="20dp"
+            style="@style/EditText"
+            />
 
-    <EditText
-        android:id="@+id/etPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Unesite lozinku..."
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unesite lozinku..."
+            android:textSize="20dp"
+            android:inputType="textPassword"
+            style="@style/EditText" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOGIN" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGIN" />
+        android:layout_gravity="center"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:visibility="gone"/>
 
 </LinearLayout>

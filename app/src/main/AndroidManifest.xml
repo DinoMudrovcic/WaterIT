@@ -3,6 +3,8 @@
     package="com.dinomudrovcic.waterit">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,12 +21,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".BaseActivity"></activity>
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:parentActivityName=".activities.HomeActivity" />
+        <activity
+            android:name=".activities.LocationActivity"
+            android:parentActivityName=".activities.HomeActivity" />
+        <activity
+            android:name=".activities.SensorActivity"
+            android:parentActivityName=".activities.LocationActivity" />
+        <activity
+            android:name=".activities.WeatherActivity"
+            android:parentActivityName=".activities.LocationActivity" />
+        <activity
+            android:name=".activities.ActionActivity"
+            android:parentActivityName=".activities.LocationActivity" />
+        <activity android:name=".activities.THSensorsActivity"
+            android:parentActivityName=".activities.SensorActivity"></activity>
     </application>
 
 </manifest>

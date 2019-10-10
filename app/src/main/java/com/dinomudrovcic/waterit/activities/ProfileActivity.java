@@ -1,11 +1,12 @@
-package com.dinomudrovcic.waterit;
+package com.dinomudrovcic.waterit.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,12 +20,15 @@ import butterknife.ButterKnife;
 
 public class ProfileActivity extends BaseActivity {
 
+    @Nullable
     @BindView(R.id.tvUsername)
     TextView tvUsername;
 
+    @Nullable
     @BindView(R.id.tvEmail)
     TextView tvEmail;
 
+    @Nullable
     @BindView(R.id.tvFullname)
     TextView tvFullname;
 
@@ -35,11 +39,18 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        //setContentView(R.layout.activity_profile);
 
         ButterKnife.bind(this);
 
+        setTitleBar("Profil", true);
+
         showProfileInfo();
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_profile;
     }
 
     private void showProfileInfo() {
@@ -57,9 +68,9 @@ public class ProfileActivity extends BaseActivity {
 
                     User user = dataSnapshot.getValue(User.class);
 
-                    tvUsername.setText("Username: " + user.display_name);
-                    tvEmail.setText("Email: " + user.email);
-                    tvFullname.setText("Full name or company name: " + user.full_name_or_company_name);
+                    tvUsername.setText(user.display_name);
+                    tvEmail.setText(user.email);
+                    tvFullname.setText(user.full_name_or_company_name);
 
                 }
             }
