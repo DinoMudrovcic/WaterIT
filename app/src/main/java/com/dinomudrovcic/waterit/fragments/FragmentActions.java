@@ -58,7 +58,7 @@ public class FragmentActions extends Fragment {
         getValvesData();
     }
 
-    public void getValvesData() {
+    private void getValvesData() {
 
         Bundle bundle = getArguments();
         final String path = bundle.getString("path");

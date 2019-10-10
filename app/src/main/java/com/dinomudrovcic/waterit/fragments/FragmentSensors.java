@@ -53,12 +53,19 @@ public class FragmentSensors extends Fragment {
     }
 
     private void initFrags() {
+
+        FragmentSMSensor smSensor = new FragmentSMSensor();
+        smSensor.setArguments(this.getArguments());
+
         FragmentTHSensor thSensor = new FragmentTHSensor();
         thSensor.setArguments(this.getArguments());
 
+        FragmentWLSensor wlSensor = new FragmentWLSensor();
+        wlSensor.setArguments(this.getArguments());
 
-        adapter.AddFragment(new FragmentSMSensor(), "Soil");
+
+        adapter.AddFragment(smSensor, "Soil");
         adapter.AddFragment(thSensor, "Air");
-        adapter.AddFragment(new FragmentWLSensor(), "Water Level");
+        adapter.AddFragment(wlSensor, "Water Level");
     }
 }
