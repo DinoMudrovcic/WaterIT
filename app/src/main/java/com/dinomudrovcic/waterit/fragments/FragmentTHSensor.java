@@ -1,15 +1,18 @@
 package com.dinomudrovcic.waterit.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.THSensorRecyclerViewAdapter;
@@ -27,11 +30,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by ezmuddi on 9.10.2019..
  */
 
-public class FragmentTHSensor extends Fragment {
+public class FragmentTHSensor extends Fragment{
 
     private final static String SENSOR_PATH_ADDITION = "/temperature_and_humidity_sensors";
 
@@ -42,6 +48,7 @@ public class FragmentTHSensor extends Fragment {
 
     DatabaseReference locationRef;
 
+
     public FragmentTHSensor() {
     }
 
@@ -50,6 +57,8 @@ public class FragmentTHSensor extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.thsensor_fragment, container, false);
+
+
 
         recyclerView = v.findViewById(R.id.thSensor_recyclerview);
         recyclerViewAdapter = new THSensorRecyclerViewAdapter(getContext(), sensors);
@@ -62,7 +71,9 @@ public class FragmentTHSensor extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         getTHSensorData();
+
 
     }
 
@@ -97,5 +108,7 @@ public class FragmentTHSensor extends Fragment {
         locationRef.addListenerForSingleValueEvent(sensorListener);
         locationRef.addValueEventListener(sensorListener);
 
+
     }
+
 }

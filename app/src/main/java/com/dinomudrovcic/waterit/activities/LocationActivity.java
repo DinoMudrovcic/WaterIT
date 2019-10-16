@@ -55,9 +55,13 @@ public class LocationActivity extends BaseActivity {
     private void initFrags() {
         Intent intent = getIntent();
         path = intent.getStringExtra("path");
+        String city = intent.getStringExtra("city");
+        String country = intent.getStringExtra("country");
 
         Bundle bundle = new Bundle();
         bundle.putString("path", path);
+        bundle.putString("city", city);
+        bundle.putString("country", country);
 
         FragmentSensors sensors = new FragmentSensors();
         sensors.setArguments(bundle);

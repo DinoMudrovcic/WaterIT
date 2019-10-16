@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dinomudrovcic.waterit.R;
+import com.dinomudrovcic.waterit.models.Location;
 import com.dinomudrovcic.waterit.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +45,8 @@ public class HomeActivity extends BaseActivity {
     DatabaseReference userRef;
 
     List<String> locations = new ArrayList<String>();
+    String city = "";
+    String country = "";
 
 
     @Override
@@ -76,6 +79,8 @@ public class HomeActivity extends BaseActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("path", text);
                     bundle.putString("location", spLocation.getSelectedItem().toString());
+                    bundle.putString("city", city);
+                    bundle.putString("country", country);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }else{
@@ -94,9 +99,14 @@ public class HomeActivity extends BaseActivity {
                 btnGOLoc.setEnabled(true);
                 if(dataSnapshot.exists()){
                     User user = dataSnapshot.getValue(User.class);
+                    for(Location location : user.locations.values()){
+                        city = location.city;
+                        country = location.state;
+                    }
                     for(String location : user.locations.keySet()){
                         locations.add(location);
                     }
+
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.item, R.id.spinnerItem, locations);
                     adapter.setDropDownViewResource(R.layout.item);
                     spLocation.setAdapter(adapter);

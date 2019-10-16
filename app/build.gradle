@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    useLibrary  'org.apache.http.legacy'
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.dinomudrovcic.waterit"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
-        versionName "0.1BETA"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,6 +28,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.0.4'
     implementation 'com.jakewharton:butterknife:8.5.1'
     implementation 'com.google.firebase:firebase-storage:11.0.4'
+
+    compile 'com.googlecode.json-simple:json-simple:1.1'
 
 
     implementation 'com.firebaseui:firebase-ui-storage:2.0.1'
