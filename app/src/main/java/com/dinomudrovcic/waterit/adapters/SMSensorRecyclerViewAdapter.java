@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.models.SoilMoistureSensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,8 +27,6 @@ import butterknife.ButterKnife;
  */
 
 public class SMSensorRecyclerViewAdapter extends RecyclerView.Adapter<SMSensorRecyclerViewAdapter.SMSensorViewHolder> {
-
-    private final static String HUMIDITY_MARK = " %";
 
     Context context;
     List<SoilMoistureSensor> sensors;
@@ -52,7 +51,7 @@ public class SMSensorRecyclerViewAdapter extends RecyclerView.Adapter<SMSensorRe
     public void onBindViewHolder(@NonNull SMSensorViewHolder smSensorViewHolder, int position) {
 
         smSensorViewHolder.tvSMSensorName.setText(sensors.get(position).sensorName);
-        smSensorViewHolder.tvSMSensorHumidity.setText(sensors.get(position).humidity + HUMIDITY_MARK);
+        smSensorViewHolder.tvSMSensorHumidity.setText(sensors.get(position).humidity + Constants.HUMIDITY_MARK);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(sensors.get(position).picture);
 
         Glide.with(context)

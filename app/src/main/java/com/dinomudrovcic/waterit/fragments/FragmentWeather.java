@@ -12,17 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.WeatherRecyclerViewAdapter;
-import com.dinomudrovcic.waterit.models.Location;
 import com.dinomudrovcic.waterit.models.Weather;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 import org.json.simple.JSONArray;
@@ -50,26 +45,6 @@ import butterknife.ButterKnife;
  */
 
 public class FragmentWeather extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-
-    private final static String API_KEY = "04d8b1aadab3d9c69ade6b57542d845a";
-    private final static String API_WEATHER_MAIN_URL = "http://api.openweathermap.org/data/2.5/forecast/";
-    private final static String API_LOCATION_COUNTRY_MAIN_URL = "http://restcountries.eu/rest/v2/name/";
-    private final static String LANGUAGES = "languages";
-    private final static String COUNTRY_ISO_CODE = "iso639_1";
-    private final static String API_IMG_MAIN_URL = "http://openweathermap.org/img/wn/";
-    private final static String API_IMG_EXTENSION = "@2x.png";
-    private final static String WEATHER_LISTS = "list";
-    private final static String WEATHER_LISTS_MAIN = "main";
-    private final static String WEATHER_LISTS_MAIN_TEMP = "temp";
-    private final static String WEATHER_LISTS_MAIN_HUM = "humidity";
-    private final static String WEATHER_LISTS_WEATHER = "weather";
-    private final static String WEATHER_LISTS_WEATHER_ICON = "icon";
-    private final static String WEATHER_LISTS_DT_TXT = "dt_txt";
-    private final static String WEATHER_LISTS_RAIN = "rain";
-    private final static String WEATHER_LISTS_RAIN_3H = "3h";
-    private final static double KELVIN_TO_CELSIUS = 273.15;
-    private final static String TEMPERATURE_UNITS_VALUE = "metric";
-
 
     View v;
     RecyclerView recyclerView;
@@ -136,8 +111,8 @@ public class FragmentWeather extends Fragment implements SwipeRefreshLayout.OnRe
         URL url;
         HttpURLConnection connection = null;
 
-        String urlString = API_WEATHER_MAIN_URL + "?appid=" + API_KEY + "&q=" + city + ","
-                + countryReg + "&units=" + TEMPERATURE_UNITS_VALUE;
+        String urlString = Constants.API_WEATHER_MAIN_URL + "?appid=" + Constants.API_KEY + "&q=" + city + ","
+                + countryReg + "&units=" + Constants.TEMPERATURE_UNITS_VALUE;
 
         try {
             url = new URL(urlString);
@@ -145,30 +120,30 @@ public class FragmentWeather extends Fragment implements SwipeRefreshLayout.OnRe
             InputStream in = new BufferedInputStream(connection.getInputStream());
             JSONParser jsonParser = new JSONParser();
             JSONObject weatherObject = (JSONObject) jsonParser.parse(new InputStreamReader(in, "UTF-8"));
-            JSONArray weatherList = (JSONArray) weatherObject.get(WEATHER_LISTS);
+            JSONArray weatherList = (JSONArray) weatherObject.get(Constants.WEATHER_LISTS);
             for(int i = 0; i < 10; i++){
                 //get weather object
                 JSONObject weatherObjectItem = (JSONObject) weatherList.get(i);
 
                 //get date-time
-                String dt = convertDateTime(weatherObjectItem.get(WEATHER_LISTS_DT_TXT).toString());
+                String dt = convertDateTime(weatherObjectItem.get(Constants.WEATHER_LISTS_DT_TXT).toString());
 
                 //get main
-                JSONObject main = (JSONObject) weatherObjectItem.get(WEATHER_LISTS_MAIN);
-                String temp = main.get(WEATHER_LISTS_MAIN_TEMP).toString();
-                String hum = main.get(WEATHER_LISTS_MAIN_HUM).toString();
+                JSONObject main = (JSONObject) weatherObjectItem.get(Constants.WEATHER_LISTS_MAIN);
+                String temp = main.get(Constants.WEATHER_LISTS_MAIN_TEMP).toString();
+                String hum = main.get(Constants.WEATHER_LISTS_MAIN_HUM).toString();
 
                 //get weather
-                JSONArray weat = (JSONArray) weatherObjectItem.get(WEATHER_LISTS_WEATHER);
+                JSONArray weat = (JSONArray) weatherObjectItem.get(Constants.WEATHER_LISTS_WEATHER);
                 JSONObject weatherObj = (JSONObject) weat.get(0);
-                String icon = API_IMG_MAIN_URL + weatherObj.get(WEATHER_LISTS_WEATHER_ICON).toString()
-                        + API_IMG_EXTENSION;
+                String icon = Constants.API_IMG_MAIN_URL + weatherObj.get(Constants.WEATHER_LISTS_WEATHER_ICON).toString()
+                        + Constants.API_IMG_EXTENSION;
 
                 //get percipitation
                 String rainStr = "0";
-                if(weatherObjectItem.containsKey(WEATHER_LISTS_RAIN)){
-                    JSONObject rain = (JSONObject) weatherObjectItem.get(WEATHER_LISTS_RAIN);
-                    rainStr = calculateToCm(rain.get(WEATHER_LISTS_RAIN_3H).toString());
+                if(weatherObjectItem.containsKey(Constants.WEATHER_LISTS_RAIN)){
+                    JSONObject rain = (JSONObject) weatherObjectItem.get(Constants.WEATHER_LISTS_RAIN);
+                    rainStr = calculateToCm(rain.get(Constants.WEATHER_LISTS_RAIN_3H).toString());
                 }
 
                 data.add(new Weather(dt, temp, rainStr, hum, icon, city, country));
@@ -214,15 +189,15 @@ public class FragmentWeather extends Fragment implements SwipeRefreshLayout.OnRe
         HttpURLConnection connection = null;
 
         try {
-            url = new URL(API_LOCATION_COUNTRY_MAIN_URL + country);
+            url = new URL(Constants.API_LOCATION_COUNTRY_MAIN_URL + country);
             connection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(connection.getInputStream());
             JSONParser jsonParser = new JSONParser();
             JSONArray countryObjects = (JSONArray) jsonParser.parse(new InputStreamReader(in, "UTF-8"));
             JSONObject countryObject = (JSONObject) countryObjects.get(0);
-            JSONArray languages = (JSONArray) countryObject.get(LANGUAGES);
+            JSONArray languages = (JSONArray) countryObject.get(Constants.LANGUAGES);
             JSONObject language = (JSONObject) languages.get(0);
-            result = language.get(COUNTRY_ISO_CODE).toString();
+            result = language.get(Constants.COUNTRY_ISO_CODE).toString();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

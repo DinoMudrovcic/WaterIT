@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.SMSensorRecyclerViewAdapter;
 import com.dinomudrovcic.waterit.models.SoilMoistureSensor;
-import com.dinomudrovcic.waterit.models.TemperatureAndHumiditySensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +28,6 @@ import java.util.List;
  */
 
 public class FragmentSMSensor extends Fragment {
-
-    private final static String SENSOR_PATH_ADDITION = "/soil_moisture_sensors";
 
     View v;
     RecyclerView recyclerView;
@@ -64,7 +62,7 @@ public class FragmentSMSensor extends Fragment {
         Bundle bundle = this.getArguments();
         final String path = bundle.getString("path");
 
-        locationRef = FirebaseDatabase.getInstance().getReference(path + SENSOR_PATH_ADDITION);
+        locationRef = FirebaseDatabase.getInstance().getReference(path + Constants.SMSENSOR_PATH_ADDITION);
 
         ValueEventListener sensorListener = new ValueEventListener() {
             @Override

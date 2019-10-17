@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.models.TemperatureAndHumiditySensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,9 +27,6 @@ import butterknife.ButterKnife;
  */
 
 public class THSensorRecyclerViewAdapter extends RecyclerView.Adapter<THSensorRecyclerViewAdapter.THSensorViewHolder> {
-
-    private final static String TEMPERATURE_MARK = " °C";
-    private final static String HUMIDITY_MARK = " %";
 
     Context context;
     List<TemperatureAndHumiditySensor> thSensors;
@@ -52,8 +50,8 @@ public class THSensorRecyclerViewAdapter extends RecyclerView.Adapter<THSensorRe
     public void onBindViewHolder(@NonNull THSensorViewHolder viewHolder, int position) {
 
         viewHolder.tvSensorName.setText(thSensors.get(position).sensorName.toString());
-        viewHolder.tvTemperatureData.setText(thSensors.get(position).temperature.toString() + TEMPERATURE_MARK);
-        viewHolder.tvHumidityData.setText(thSensors.get(position).humidity.toString() + HUMIDITY_MARK);
+        viewHolder.tvTemperatureData.setText(thSensors.get(position).temperature.toString() + Constants.TEMPERATURE_MARK);
+        viewHolder.tvHumidityData.setText(thSensors.get(position).humidity.toString() + Constants.HUMIDITY_MARK);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(thSensors.get(position).picture);
 
         Glide.with(context)

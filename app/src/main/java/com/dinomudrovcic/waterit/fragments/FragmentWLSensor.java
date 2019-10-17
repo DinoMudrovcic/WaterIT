@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.WLSensorRecyclerViewAdapter;
 import com.dinomudrovcic.waterit.models.WaterLevelSensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +28,6 @@ import java.util.List;
  */
 
 public class FragmentWLSensor extends Fragment {
-
-    private final static String SENSOR_PATH_ADDITION = "/water_level_sensors";
 
     View v;
     RecyclerView recyclerView;
@@ -63,7 +62,7 @@ public class FragmentWLSensor extends Fragment {
         Bundle bundle = this.getArguments();
         final String path = bundle.getString("path");
 
-        locationRef = FirebaseDatabase.getInstance().getReference(path + SENSOR_PATH_ADDITION);
+        locationRef = FirebaseDatabase.getInstance().getReference(path + Constants.SENSOR_PATH_ADDITION);
 
         ValueEventListener sensorListener = new ValueEventListener() {
             @Override

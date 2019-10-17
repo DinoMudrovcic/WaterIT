@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.models.Weather;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.dinomudrovcic.waterit.utils.Constants;
 
 import java.util.List;
 
@@ -24,10 +24,6 @@ import butterknife.ButterKnife;
  */
 
 public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.WeatherViewHolder> {
-
-    private final static String TEMPERATURE_MARK = "°C";
-    private final static String PERCIPITATION_MARK = "cm";
-    private final static String HUMIDITY_MARK = "%";
 
     Context context;
     List<Weather> weatherData;
@@ -50,9 +46,9 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
     public void onBindViewHolder(@NonNull WeatherViewHolder weatherViewHolder, int position) {
 
         weatherViewHolder.tvWeatherTime.setText(weatherData.get(position).time);
-        weatherViewHolder.tvWeatherTemperature.setText(weatherData.get(position).temperature + TEMPERATURE_MARK);
-        weatherViewHolder.tvWeatherPercipitation.setText(weatherData.get(position).percipitation + PERCIPITATION_MARK);
-        weatherViewHolder.tvWeatherHumidity.setText(weatherData.get(position).humidity + HUMIDITY_MARK);
+        weatherViewHolder.tvWeatherTemperature.setText(weatherData.get(position).temperature + Constants.TEMPERATURE_MARK);
+        weatherViewHolder.tvWeatherPercipitation.setText(weatherData.get(position).percipitation + Constants.PERCIPITATION_MARK);
+        weatherViewHolder.tvWeatherHumidity.setText(weatherData.get(position).humidity + Constants.HUMIDITY_MARK);
 
         Glide.with(context)
                 .load(weatherData.get(position).picture)

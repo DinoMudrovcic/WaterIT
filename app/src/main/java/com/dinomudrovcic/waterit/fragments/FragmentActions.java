@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.ValveRecyclerViewAdapter;
 import com.dinomudrovcic.waterit.models.Valve;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +28,6 @@ import java.util.List;
  */
 
 public class FragmentActions extends Fragment {
-
-    private final static String VALVE_PATH_ADDITION = "/valves";
 
     View v;
     RecyclerView recyclerView;
@@ -63,7 +62,7 @@ public class FragmentActions extends Fragment {
         Bundle bundle = getArguments();
         final String path = bundle.getString("path");
 
-        locationRef = FirebaseDatabase.getInstance().getReference(path + VALVE_PATH_ADDITION);
+        locationRef = FirebaseDatabase.getInstance().getReference(path + Constants.VALVE_PATH_ADDITION);
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -74,7 +73,7 @@ public class FragmentActions extends Fragment {
                     String valveName = ds.getKey().toString();
                     String status = ds.child("status").getValue(String.class);
                     String picture = ds.child("picture").getValue(String.class);
-                    valves.add(new Valve(valveName, status, picture, path + VALVE_PATH_ADDITION));
+                    valves.add(new Valve(valveName, status, picture, path + Constants.VALVE_PATH_ADDITION));
 //                    valves.add(new Valve(valveName, status, picture));
                 }
                 valveRecyclerViewAdapter.notifyDataSetChanged();

@@ -34,7 +34,6 @@ public class ValveRecyclerViewAdapter extends RecyclerView.Adapter<ValveRecycler
 
     Context context;
     List<Valve> valves;
-//    String path;
 
     public ValveRecyclerViewAdapter(Context context, List<Valve> valves) {
         this.context = context;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.models.WaterLevelSensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,8 +27,6 @@ import butterknife.ButterKnife;
  */
 
 public class WLSensorRecyclerViewAdapter extends RecyclerView.Adapter<WLSensorRecyclerViewAdapter.WLSensorViewHolder> {
-
-    private final static String WATER_LEVEL_MARK = " %";
 
     Context context;
     List<WaterLevelSensor> sensors;
@@ -50,7 +49,7 @@ public class WLSensorRecyclerViewAdapter extends RecyclerView.Adapter<WLSensorRe
     @Override
     public void onBindViewHolder(@NonNull WLSensorViewHolder wlSensorViewHolder, int position) {
         wlSensorViewHolder.tvWLSensorName.setText(sensors.get(position).sensorName);
-        wlSensorViewHolder.tvWLSensorWaterLevelData.setText(sensors.get(position).level + WATER_LEVEL_MARK);
+        wlSensorViewHolder.tvWLSensorWaterLevelData.setText(sensors.get(position).level + Constants.WATER_LEVEL_MARK);
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(sensors.get(position).picture);
 

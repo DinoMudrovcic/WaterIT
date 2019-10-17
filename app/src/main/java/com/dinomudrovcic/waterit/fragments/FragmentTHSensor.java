@@ -1,45 +1,33 @@
 package com.dinomudrovcic.waterit.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dinomudrovcic.waterit.R;
 import com.dinomudrovcic.waterit.adapters.THSensorRecyclerViewAdapter;
-import com.dinomudrovcic.waterit.models.Location;
 import com.dinomudrovcic.waterit.models.TemperatureAndHumiditySensor;
+import com.dinomudrovcic.waterit.utils.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
-import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by ezmuddi on 9.10.2019..
  */
 
 public class FragmentTHSensor extends Fragment{
-
-    private final static String SENSOR_PATH_ADDITION = "/temperature_and_humidity_sensors";
 
     View v;
     RecyclerView recyclerView;
@@ -82,7 +70,7 @@ public class FragmentTHSensor extends Fragment{
         Bundle bundle = this.getArguments();
         String path = bundle.getString("path");
 
-        locationRef = FirebaseDatabase.getInstance().getReference(path + SENSOR_PATH_ADDITION);
+        locationRef = FirebaseDatabase.getInstance().getReference(path + Constants.THSENSOR_PATH_ADDITION);
 
         ValueEventListener sensorListener = new ValueEventListener() {
             @Override
